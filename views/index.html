@@ -1,0 +1,38 @@
+{{ block "index" .}}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta title="UTF" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+  </head>
+  <body style="background-color: black; color: white">
+    <!-- <div id="count">{{ template "count" . }}</div>
+    <button hx-target="#count" hx-post="/count">Count</button> -->
+    {{template "form" .}}
+    <hr />
+    {{template "display" .}}
+  </body>
+</html>
+<!-- {{ end }} {{ block "count" .}} Count {{ .Count}} {{ end }} -->
+
+{{define "form"}}
+<form hx-post="/contacts">
+  <label for="name">Name:</label>
+  <input type="text" name="name" title="name" />
+  <label for="email">Email:</label>
+  <input type="email" name="email" title="email" />
+  <button type="submit">Create Contact</button>
+</form>
+{{end}}
+
+{{define "display"}}
+<div style="display: flex">
+  {{range .Contacts}}
+    <div>{{.Name}}</div>
+    <div>{{.Email}}</div>
+  {{end}}
+</div>
+{{end}}
